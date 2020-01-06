@@ -4,19 +4,26 @@ import FooterMenu from "./components/FooterMenu";
 import Content from "./components/Content";
 import HeaderMenu from "./components/HeaderMenu";
 import Carousel from "./components/Carousel";
+import SignInModal from './components/SignInModal';
 
 class App extends Component<any, any> {
   constructor(props: any) {
     super(props);
     this.state = {
       windowWidth: 0,
-      windowHeight: 0
+      windowHeight: 0,
+      account: {},
+      isLoginModalOn: false,
     };
   }
 
   componentDidMount() {
     this.updateDimensions();
     window.addEventListener("resize", this.updateDimensions.bind(this));
+    const fbAccounts = JSON.parse(window.localStorage.getItem('firebaseui::rememberedAccounts') || '');
+    if(fbAccounts){
+      this.setState({account: fbAccounts[0]});
+    }
   }
 
   componentWillUnmount() {
@@ -28,6 +35,16 @@ class App extends Component<any, any> {
     let windowHeight = typeof window !== "undefined" ? window.innerHeight : 0;
 
     this.setState({ windowWidth, windowHeight });
+  }
+
+  handleLogin(text: string){
+    if(text.toLowerCase() === 'profile'){
+      this.switchLoginModalView();
+    }
+  }
+
+  switchLoginModalView(){
+    this.setState({isLoginModalOn: !this.state.isLoginModalOn})
   }
 
   render() {
@@ -69,10 +86,11 @@ class App extends Component<any, any> {
         }}
       >
         {styles.showSidebar ? (
-          <HeaderMenu menuItems={menuItems} styles={styles} />
+          <HeaderMenu menuItems={menuItems} styles={styles} handleLogin={ this.handleLogin.bind(this)}/>
         ) : (
           <TopBar styles={styles} />
         )}
+        {this.state.isLoginModalOn ? <SignInModal styles={styles} switchLoginModalView = { this.switchLoginModalView.bind(this)}/> : ""}
         <Carousel styles={styles}/>
         <Content styles={styles} />
 
