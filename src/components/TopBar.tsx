@@ -19,7 +19,7 @@ const TopBar = ({ styles } : any) => {
   return (
     <div style={topBarStyle}>
       <span>{`😺️`}</span>
-      App
+      MG
       <span>{`⚙️`}</span>
     </div>
   );

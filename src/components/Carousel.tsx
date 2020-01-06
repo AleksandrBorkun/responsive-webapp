@@ -6,12 +6,13 @@ import img4 from './../assets/4.jpg'
 
 const Carousel = ({styles} : any) =>{
     const isPC = styles.headerWidth > 50;
+    const carouselWidth = 155*8;
     const containerStyle = {
         width: "100%",
-        maxWidth: 155*10,
-        marginTop: !styles.showSidebar ? "50px" : isPC ? "16vh" : "30px",
-        position: 'fixed',
-        paddingLeft: !styles.showSidebar ? '2px' : "10px",
+        maxWidth: carouselWidth,
+        marginTop: !styles.showSidebar ? "50px" : isPC ? "150px" : "30px",
+        position: styles.showSidebar ? 'fixed' : "relative",
+        paddingLeft: styles.windowWidth > carouselWidth ? (styles.windowWidth - carouselWidth)/2: !styles.showSidebar ? '2px' : "10px",
         backgroundColor: styles.bgColor(0.8),
         marginLeft: isPC || !styles.showSidebar ? 'auto' : styles.headerWidth,
         whiteSpace: 'nowrap',

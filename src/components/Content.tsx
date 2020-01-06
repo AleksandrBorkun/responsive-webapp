@@ -2,7 +2,7 @@
 import React from "react";
 
 const Content = ({ styles } : any) => {
-  const topPadding = styles.headerWidth > 50 ? "40vh" : 250;
+  const topPadding = !styles.showSidebar ? 20 : styles.headerWidth > 50 ? "370px" : 250;
   const { showSidebar } = styles;
 
   const dummyPost = {

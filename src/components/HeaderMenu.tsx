@@ -4,7 +4,7 @@ const HeaderMenu = ({ menuItems, styles} : any) => {
   const isPC =  styles.headerWidth > 1100
   const width = isPC ? (100/(menuItems.length + 2))/100 * styles.headerWidth : "auto";
   const sidebarStyle = {
-    height: styles.headerWidth > 1100 ? "10vh" : "100vh",
+    height: styles.headerWidth > 1100 ? "90px" : "100vh",
     width: styles.headerWidth,
     position: 'fixed',
     backgroundImage: isPC 
@@ -44,7 +44,7 @@ const HeaderMenu = ({ menuItems, styles} : any) => {
     <div style={sidebarStyle}>
       <div style={logoStyle} >{styles.sidebarCollapsed ? "M" : "MG"}</div>
       {menuItems.map( (item : any, i : number)=> (
-        <div style={menuItemStyle} className = 'headerMenuBtn'>
+        <div key = {i} style={menuItemStyle} className = 'headerMenuBtn'>
           <span style={iconStyle}>{item.icon}</span>
           {!styles.sidebarCollapsed && item.text}
         </div>
