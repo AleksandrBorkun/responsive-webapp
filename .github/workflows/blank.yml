@@ -1,0 +1,24 @@
+name: CI
+
+on:
+  push:	
+    branches:	
+      - master
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v1
+    - name: Build and Deploy
+      uses: JamesIves/github-pages-deploy-action@releases/v3
+      with:
+        REACT_APP_FB_API_KEY: ${{ secrets.REACT_APP_FB_API_KEY }}
+        REACT_APP_FB_SENDER_ID: ${{ secrets.FB_SENDER_ID }}
+        REACT_APP_FB_APP_ID: ${{ secrets.FB_APP_ID }}
+        REACT_APP_FB_MEASUREMENT_ID: ${{ secrets.FB_MEASUREMENT_ID }}
+        BRANCH: gh-pages # The branch the action should deploy to.
+        FOLDER: build # The folder the action should deploy.
