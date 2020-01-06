@@ -16,6 +16,7 @@ jobs:
     - name: Build and Deploy
       uses: JamesIves/github-pages-deploy-action@releases/v3
       with:
+        ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
         REACT_APP_FB_API_KEY: ${{ secrets.REACT_APP_FB_API_KEY }}
         REACT_APP_FB_SENDER_ID: ${{ secrets.FB_SENDER_ID }}
         REACT_APP_FB_APP_ID: ${{ secrets.FB_APP_ID }}
