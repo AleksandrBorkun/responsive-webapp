@@ -46,3 +46,14 @@ code {
 ::-webkit-scrollbar-thumb:hover {
   background: rgb(46, 78, 240); 
 }
+
+button:hover{
+  cursor: pointer;
+  color:  rgba(46, 78, 240, 1);
+  border-color: rgba(46, 78, 240, 1);
+}
+
+@keyframes animatetop {
+  from {top: -300px; opacity: 0}
+  to {top: 0; opacity: 1}
+}

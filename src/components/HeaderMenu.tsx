@@ -1,6 +1,6 @@
 import React from "react";
 
-const HeaderMenu = ({ menuItems, styles} : any) => {
+const HeaderMenu = ({ menuItems, styles, handleLogin} : any) => {
   const isPC =  styles.headerWidth > 1100
   const width = isPC ? (100/(menuItems.length + 2))/100 * styles.headerWidth : "auto";
   const sidebarStyle = {
@@ -44,7 +44,7 @@ const HeaderMenu = ({ menuItems, styles} : any) => {
     <div style={sidebarStyle}>
       <div style={logoStyle} >{styles.sidebarCollapsed ? "M" : "MG"}</div>
       {menuItems.map( (item : any, i : number)=> (
-        <div key = {i} style={menuItemStyle} className = 'headerMenuBtn'>
+        <div key = {i} style={menuItemStyle} className = 'headerMenuBtn' onClick = {() => handleLogin(item.text)}>
           <span style={iconStyle}>{item.icon}</span>
           {!styles.sidebarCollapsed && item.text}
         </div>
