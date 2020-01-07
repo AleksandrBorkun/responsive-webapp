@@ -15,15 +15,15 @@ jobs:
       uses: actions/checkout@v1
     - name: Install # The project is built using npm and placed in the 'build' folder.
       run: |
+          export REACT_APP_FB_API_KEY=${{ secrets.REACT_APP_FB_API_KEY }}
+          export REACT_APP_FB_SENDER_ID=${{ secrets.FB_SENDER_ID }}
+          export REACT_APP_FB_APP_ID=${{ secrets.FB_APP_ID }}
+          export REACT_APP_FB_MEASUREMENT_ID=${{ secrets.FB_MEASUREMENT_ID }}
           npm install
           npm run-script build
     - name: Build and Deploy
       uses: JamesIves/github-pages-deploy-action@releases/v3
       with:
         ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
-        REACT_APP_FB_API_KEY: ${{ secrets.REACT_APP_FB_API_KEY }}
-        REACT_APP_FB_SENDER_ID: ${{ secrets.FB_SENDER_ID }}
-        REACT_APP_FB_APP_ID: ${{ secrets.FB_APP_ID }}
-        REACT_APP_FB_MEASUREMENT_ID: ${{ secrets.FB_MEASUREMENT_ID }}
         BRANCH: gh-pages # The branch the action should deploy to.
         FOLDER: build # The folder the action should deploy.
