@@ -18,7 +18,6 @@ class App extends Component<any, any> {
   }
 
   componentDidMount() {
-    console.log(process.env.REACT_APP_FB_SENDER_ID);
     this.updateDimensions();
     window.addEventListener("resize", this.updateDimensions.bind(this));
     const localAccount = window.localStorage.getItem('firebaseui::rememberedAccounts');
