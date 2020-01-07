@@ -18,11 +18,15 @@ class App extends Component<any, any> {
   }
 
   componentDidMount() {
+    console.log(process.env.REACT_APP_FB_SENDER_ID);
     this.updateDimensions();
     window.addEventListener("resize", this.updateDimensions.bind(this));
-    const fbAccounts = JSON.parse(window.localStorage.getItem('firebaseui::rememberedAccounts') || '');
-    if(fbAccounts){
-      this.setState({account: fbAccounts[0]});
+    const localAccount = window.localStorage.getItem('firebaseui::rememberedAccounts');
+    if(localAccount){
+      const fbAccounts = JSON.parse(localAccount || '');
+      if(fbAccounts){
+        this.setState({account: fbAccounts[0]});
+      }
     }
   }
 
