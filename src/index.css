@@ -57,3 +57,11 @@ button:hover{
   from {top: -300px; opacity: 0}
   to {top: 0; opacity: 1}
 }
+
+.socialBtn button:hover{
+  
+}
+
+.hidden .shareBtn{
+  display: none;
+}

@@ -1,5 +1,18 @@
   
 import React from "react";
+import {
+  FacebookShareButton,
+  PinterestShareButton,
+  InstapaperShareButton,
+  WhatsappShareButton,
+  LinkedinShareButton,
+  FacebookIcon,
+  PinterestIcon,
+  InstapaperIcon,
+  WhatsappIcon,
+  LinkedinIcon
+} from "react-share";
+
 
 const Content = ({ styles } : any) => {
   const topPadding = !styles.showSidebar ? 20 : styles.headerWidth > 50 ? "370px" : 250;
@@ -23,9 +36,19 @@ const Content = ({ styles } : any) => {
 
   const socialBtnSyle = {
     fontWeight: "bold",
-    float: "right",
-    paddingRight : 20
+    float: 'left',
+    paddingRight : 25,
   } as React.CSSProperties
+
+  const socialBtnsContainer = {
+    backgroundColor: styles.bgColor(),
+    position: 'absolute',
+    border: '1px solid',
+    width: '170px',
+    height: '75px',
+    borderRadius: '5px',
+    marginTop: '5px'
+  }  as React.CSSProperties
 
   return (
     <div className = "contentConatainer" style={contentStyle}>
@@ -34,9 +57,41 @@ const Content = ({ styles } : any) => {
           <div key={i} style={{ marginBottom: 40 }}>
             <h2 style={{ marginBottom: 0 }}>{post.title}</h2>
             <p>{post.summary}</p>
-            <span className = 'socialBtn' style = {socialBtnSyle}>&emsp;Like</span> 
-            <span className = 'socialBtn' style = {socialBtnSyle}>&emsp;Share</span>
-            <span className = 'socialBtn' style = {socialBtnSyle}>&emsp;Comment</span>
+            <span className = {`hidden socialBtn ${i}`} onClick = {()=>{
+                  let el = document.getElementsByClassName(`hidden socialBtn ${i}`)[0];
+                  if(el){
+                    el.className = `socialBtn ${i}`
+                  }else{
+                    el =  document.getElementsByClassName(`socialBtn ${i}`)[0];
+                    if(el) {el.className = `hidden socialBtn ${i}`}
+                  }
+                }
+              } style = {socialBtnSyle}>&emsp;Share
+              <div style = {socialBtnsContainer} className = 'shareBtn'>
+                <FacebookShareButton url = 'https://aleksandrborkun.github.io/responsive-webapp/' quote={`test ${i}`}>
+                  <FacebookIcon round size={32}/>  
+                </FacebookShareButton>
+                <PinterestShareButton url = 'https://aleksandrborkun.github.io/responsive-webapp/' media = 'https://aleksandrborkun.github.io/responsive-webapp/' description='test'>
+                  <PinterestIcon round size={32}/>  
+                </PinterestShareButton>  
+                <InstapaperShareButton url = 'https://aleksandrborkun.github.io/responsive-webapp/'>
+                  <InstapaperIcon round size={32}/>  
+                </InstapaperShareButton>  
+                <WhatsappShareButton url = 'https://aleksandrborkun.github.io/responsive-webapp/'>
+                  <WhatsappIcon round size={32}/>  
+                </WhatsappShareButton>
+                <LinkedinShareButton url = 'https://aleksandrborkun.github.io/responsive-webapp/'>
+                  <LinkedinIcon size={32} round/>
+                </LinkedinShareButton>
+                <input placeholder='saldkfas' onClick = {() => {
+                  console.log('link copied!')
+                  alert('link copied!')
+                }}/>
+              </div>            
+            </span>
+            <span className = 'socialBtn' style = {socialBtnSyle}>&emsp;Like
+              {i ? <button style = {{backgroundColor: styles.bgColor(), borderRadius: '100%'}}>{i}</button> : ''}
+            </span> 
           </div>
         );
       })}
