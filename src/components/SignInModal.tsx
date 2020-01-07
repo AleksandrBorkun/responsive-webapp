@@ -16,13 +16,28 @@ const SignInModal = ({ styles, switchLoginModalView }: any) => {
         // Popup signin flow rather than redirect flow.
         signInFlow: 'popup',
         // Redirect to /signedIn after sign in is successful. Alternatively you can provide a callbacks.signInSuccess function.
-        signInSuccessUrl: '/',
+        // callbacks: {
+        //     signInSuccess: (currentUser, credential, redirectUrl) => {
+        //         const userId = currentUser.uid;
+        //         console.log(currentUser)
+        //         console.log(credential)
+        //         console.log(redirectUrl)
+        //         return false
+        //     },
+        // },
+        // signInSuccessUrl: '/',
         // We will display Google and Facebook as auth providers.
         signInOptions: [
             firebase.auth.GoogleAuthProvider.PROVIDER_ID,
             firebase.auth.FacebookAuthProvider.PROVIDER_ID
-        ]
-    };
+        ],
+        callbacks: {
+                signInSuccess: (currentUser, credential) => {
+                    switchLoginModalView();
+                    return false
+                },
+            }
+    } as firebaseui.auth.Config;
 
     const modalContainerStyle = {
         position: 'fixed',
